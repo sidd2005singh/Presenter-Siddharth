@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Build a T-Shirt Branding Web App on Replit | HENU OS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #3b82f6;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --bg-light: #f9fafb;
+            --bg-white: #ffffff;
+            --border-color: #e5e7eb;
+            --shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: var(--bg-white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: var(--secondary-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--bg-white);
+            margin: 40px 0;
+            border-radius: 20px;
+            padding: 60px 40px;
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero .subtitle {
+            font-size: 20px;
+            color: var(--text-light);
+            margin-bottom: 15px;
+        }
+
+        .presenter {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        /* Main Content */
+        .main-content {
+            background: var(--bg-white);
+            margin: 40px 0;
+            border-radius: 20px;
+            padding: 60px 40px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .intro-box {
+            background: linear-gradient(135deg, #667eea15, #764ba215);
+            border-left: 4px solid var(--primary-color);
+            padding: 20px 24px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+        }
+
+        .intro-box p {
+            font-size: 18px;
+            color: var(--text-dark);
+            line-height: 1.8;
+        }
+
+        /* Section Styling */
+        .section {
+            margin-bottom: 50px;
+        }
+
+        .section-number {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            font-weight: 700;
+            margin-right: 15px;
+            font-size: 18px;
+        }
+
+        .section h2 {
+            display: flex;
+            align-items: center;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+        }
+
+        .section h3 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--secondary-color);
+            margin: 25px 0 15px 0;
+        }
+
+        .section p, .section li {
+            font-size: 17px;
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .section ul, .section ol {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+
+        .section li {
+            margin-bottom: 10px;
+        }
+
+        /* Code Blocks */
+        .code-block {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 24px;
+            border-radius: 12px;
+            overflow-x: auto;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            box-shadow: var(--shadow);
+        }
+
+        .code-header {
+            background: var(--bg-light);
+            padding: 10px 20px;
+            border-radius: 8px 8px 0 0;
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 14px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .code-block pre {
+            margin: 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        /* Feature Cards */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .feature-card {
+            background: var(--bg-light);
+            padding: 24px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .feature-card h4 {
+            color: var(--primary-color);
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            font-size: 15px;
+            color: var(--text-light);
+        }
+
+        /* Info Box */
+        .info-box {
+            background: #dbeafe;
+            border-left: 4px solid var(--primary-color);
+            padding: 16px 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .info-box strong {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        /* Success Box */
+        .success-box {
+            background: #d1fae5;
+            border-left: 4px solid #10b981;
+            padding: 16px 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        /* Summary Box */
+        .summary-box {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 40px;
+            border-radius: 16px;
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .summary-box h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .summary-box p {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-white);
+            margin: 40px 0 0 0;
+            border-radius: 20px 20px 0 0;
+            padding: 40px;
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .footer-logo span {
+            color: var(--secondary-color);
+        }
+
+        footer p {
+            color: var(--text-light);
+            font-size: 16px;
+            margin: 10px 0;
+        }
+
+        .copyright {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-light);
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero .subtitle {
+                font-size: 18px;
+            }
+
+            .main-content, .hero {
+                padding: 40px 24px;
+            }
+
+            .section h2 {
+                font-size: 24px;
+            }
+
+            .code-block {
+                padding: 16px;
+                font-size: 13px;
+            }
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">HENU <span>OS</span></a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="hero">
+            <h1>📄 Build a T-Shirt Branding Web App on Replit</h1>
+            <p class="subtitle">A no-local-setup, fully browser-based guide</p>
+            <div class="presenter">Presenting: Siddharth Singh – Founder & CEO, HENU OS</div>
+        </section>
+
+        <main class="main-content">
+            <div class="intro-box">
+                <p>A <strong>no-local-setup</strong>, fully browser-based guide to creating, coding, and publishing a simple T-shirt branding web app using <strong>Replit</strong>.</p>
+            </div>
+
+            <!-- Section 1 -->
+            <div class="section">
+                <h2><span class="section-number">1</span> What You'll Build</h2>
+                <p>A <strong>T-Shirt Branding Web App</strong> where users can:</p>
+                <ul>
+                    <li>Choose a T-shirt color</li>
+                    <li>Upload or select a logo/text</li>
+                    <li>See a <strong>live preview</strong> of their branded T-shirt</li>
+                </ul>
+                <div class="info-box">
+                    <strong>Key Benefits:</strong> The app runs entirely on Replit (no local install required)
+                </div>
+                <p><strong>You'll learn:</strong></p>
+                <ul>
+                    <li>How to use Replit's editor, file explorer, console, and live preview</li>
+                    <li>How to publish your app so anyone can access it</li>
+                </ul>
+            </div>
+
+            <!-- Section 2 -->
+            <div class="section">
+                <h2><span class="section-number">2</span> Prerequisites</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>✓ Replit Account</h4>
+                        <p>Free account at replit.com</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>✓ Web Browser</h4>
+                        <p>Chrome, Edge, or Firefox</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>✓ Basic HTML/CSS/JS</h4>
+                        <p>Not required, but helpful</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3 -->
+            <div class="section">
+                <h2><span class="section-number">3</span> Step 1: Create a New Replit Project</h2>
+                <ol>
+                    <li>Go to <strong>replit.com</strong> and log in</li>
+                    <li>Click the <strong>"+ Create"</strong> button</li>
+                    <li>Choose template: Select <strong>"HTML, CSS, JS"</strong> (for pure frontend)</li>
+                    <li>Give your project a name, for example: <code>tshirt-branding-app</code></li>
+                    <li>Click <strong>"Create Repl"</strong></li>
+                </ol>
+                <div class="success-box">
+                    <strong>✓ Success!</strong> Now you're inside your Replit workspace.
+                </div>
+            </div>
+
+            <!-- Section 4 -->
+            <div class="section">
+                <h2><span class="section-number">4</span> Step 2: Understand the Replit Interface</h2>
+                <p>On the screen you'll see:</p>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>📁 Left Panel – File Explorer</h4>
+                        <p>Contains: index.html, style.css, script.js. You can create new files and folders here.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>✏️ Center Panel – Code Editor</h4>
+                        <p>Edit your HTML, CSS, and JS files in this area.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🖥️ Right Panel – Console/Preview</h4>
+                        <p>Console tab shows logs and errors. Web tab shows your live app preview.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 5 -->
+            <div class="section">
+                <h2><span class="section-number">5</span> Step 3: Add Basic Structure in index.html</h2>
+                <p>Open <code>index.html</code> and replace the default content with:</p>
+                <div class="code-header">index.html</div>
+                <div class="code-block">
+                    <pre>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;T-Shirt Branding Studio&lt;/title&gt;
+    &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class="container"&gt;
+        &lt;h1&gt;T-Shirt Branding Studio&lt;/h1&gt;
+        
+        &lt;div class="controls"&gt;
+            &lt;label for="shirtColor"&gt;Choose T-Shirt Color:&lt;/label&gt;
+            &lt;input type="color" id="shirtColor" value="#ffffff"&gt;
+            
+            &lt;label for="logoUpload"&gt;Upload Logo / Text:&lt;/label&gt;
+            &lt;input type="file" id="logoUpload" accept="image/*"&gt;
+            
+            &lt;label for="textOverlay"&gt;Add Text:&lt;/label&gt;
+            &lt;input type="text" id="textOverlay" placeholder="Enter your text"&gt;
+        &lt;/div&gt;
+        
+        &lt;div class="preview-area"&gt;
+            &lt;div class="tshirt" id="tshirt"&gt;
+                &lt;img id="logoPreview" style="display:none;" alt="Logo"&gt;
+                &lt;div id="textPreview"&gt;&lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    
+    &lt;script src="script.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+                </div>
+                <div class="info-box">
+                    <strong>What you did:</strong> Created a title, color picker, file upload, text input, and a preview area for the T-shirt.
+                </div>
+            </div>
+
+            <!-- Section 6 -->
+            <div class="section">
+                <h2><span class="section-number">6</span> Step 4: Style the T-Shirt in style.css</h2>
+                <p>Open <code>style.css</code> and add:</p>
+                <div class="code-header">style.css</div>
+                <div class="code-block">
+                    <pre>* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f0f0f0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.controls {
+    margin-bottom: 20px;
+}
+
+.controls label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.controls input {
+    margin-bottom: 10px;
+    padding: 8px;
+}
+
+.preview-area {
+    margin-top: 20px;
+}
+
+.tshirt {
+    width: 300px;
+    height: 400px;
+    margin: 0 auto;
+    border-radius: 20px;
+    background-color: #ffffff;
+    position: relative;
+    overflow: hidden;
+    border: 2px solid #ccc;
+}
+
+#textPreview {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    font-weight: bold;
+    color: #000;
+    pointer-events: none;
+}
+
+#logoPreview {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 120px;
+    max-height: 120px;
+    pointer-events: none;
+}</pre>
+                </div>
+                <div class="info-box">
+                    <strong>What you did:</strong> Styled the T-shirt box, centered the text/logo, and made the UI clean and mobile-friendly.
+                </div>
+            </div>
+
+            <!-- Section 7 -->
+            <div class="section">
+                <h2><span class="section-number">7</span> Step 5: Add Interactivity in script.js</h2>
+                <p>Open <code>script.js</code> and add:</p>
+                <div class="code-header">script.js</div>
+                <div class="code-block">
+                    <pre>const shirtColor = document.getElementById("shirtColor");
+const logoUpload = document.getElementById("logoUpload");
+const textOverlay = document.getElementById("textOverlay");
+const textPreview = document.getElementById("textPreview");
+const logoPreview = document.getElementById("logoPreview");
+const tshirt = document.getElementById("tshirt");
+
+// Change T-shirt color
+shirtColor.addEventListener("input", (e) => {
+    tshirt.style.backgroundColor = e.target.value;
+});
+
+// Update text on T-shirt
+textOverlay.addEventListener("input", (e) => {
+    textPreview.textContent = e.target.value;
+});
+
+// Handle logo upload
+logoUpload.addEventListener("change", (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    
+    const reader = new FileReader();
+    reader.onload = (event) => {
+        logoPreview.src = event.target.result;
+        logoPreview.style.display = "block";
+    };
+    reader.readAsDataURL(file);
+});</pre>
+                </div>
+                <div class="info-box">
+                    <strong>What you did:</strong> Connected the color picker to the T-shirt background, text input to the preview, and file upload to the logo display.
+                </div>
+            </div>
+
+            <!-- Section 8 -->
+            <div class="section">
+                <h2><span class="section-number">8</span> Step 6: Run and Test the App</h2>
+                <ol>
+                    <li>Click the <strong>green "Run"</strong> button at the top of the screen</li>
+                    <li>Replit will:
+                        <ul>
+                            <li>Start a web server automatically</li>
+                            <li>Open the <strong>Web Preview</strong> tab on the right</li>
+                        </ul>
+                    </li>
+                    <li>In the preview:
+                        <ul>
+                            <li>Change the color using the color picker</li>
+                            <li>Type text and see it appear on the T-shirt</li>
+                            <li>Upload an image and see it as a logo on the T-shirt</li>
+                        </ul>
+                    </li>
+                </ol>
+                <div class="info-box">
+                    <strong>If something breaks:</strong> Check the Console tab for errors, fix the code, and click "Run" again.
+                </div>
+            </div>
+
+            <!-- Section 9 -->
+            <div class="section">
+                <h2><span class="section-number">9</span> Step 7: Organize Files (Optional)</h2>
+                <p>You can create a cleaner structure:</p>
+                <ol>
+                    <li>In the <strong>File Explorer</strong>: Right-click → <strong>New Folder</strong> → name it <code>assets</code></li>
+                    <li>Move any uploaded images or assets into <code>assets/</code></li>
+                    <li>Update paths in JS if needed (e.g., default logo):
+                        <div class="code-block">
+                            <pre>logoPreview.src = "assets/default-logo.png";</pre>
+                        </div>
+                    </li>
+                </ol>
+                <p>This keeps your project organized and scalable.</p>
+            </div>
+
+            <!-- Section 10 -->
+            <div class="section">
+                <h2><span class="section-number">10</span> Step 8: Publish Your App</h2>
+                <ol>
+                    <li>Make sure your app runs correctly in the <strong>Web Preview</strong></li>
+                    <li>Click the <strong>"Publish"</strong> button in the top-right corner</li>
+                    <li>In the publish panel:
+                        <ul>
+                            <li>Choose <strong>"Autoscale deployment"</strong> (recommended for production-ready hosting)</li>
+                            <li>Click <strong>"Deploy"</strong></li>
+                        </ul>
+                    </li>
+                    <li>Replit will:
+                        <ul>
+                            <li>Build and deploy your app</li>
+                            <li>Give you a public URL like: <code>tshirt-branding-app.siddharth.repl.co</code></li>
+                        </ul>
+                    </li>
+                </ol>
+                <div class="success-box">
+                    <strong>🎉 Congratulations!</strong> Your T-Shirt Branding Web App is now live on the internet!
+                </div>
+            </div>
+
+            <!-- Section 11 -->
+            <div class="section">
+                <h2><span class="section-number">11</span> Step 9: Add Branding & Polish</h2>
+                <p>You can now enhance your app with:</p>
+                <ul>
+                    <li>Add your <strong>HENU OS logo</strong> and footer</li>
+                    <li>Improve the UI (better fonts, animations, responsive layout)</li>
+                    <li>Add features:
+                        <ul>
+                            <li>Save/share designs</li>
+                            <li>Download the branded T-shirt image</li>
+                        </ul>
+                    </li>
+                </ul>
+                <p>Even in its current form, this is a <strong>fully functional, published web app</strong> built entirely on Replit!</p>
+            </div>
+
+            <!-- Summary -->
+            <div class="summary-box">
+                <h3>📚 Summary</h3>
+                <p><strong>Title:</strong> Build a T-Shirt Branding Web App on Replit</p>
+                <p><strong>Presenting:</strong> Siddharth Singh – Founder & CEO, HENU OS</p>
+                <p><strong>Format:</strong> Step-by-step guide for hackathon participants</p>
+                <p><strong>Stack:</strong> HTML, CSS, JavaScript (no local setup)</p>
+                <p><strong>Hosting:</strong> Replit (free + instant deployment)</p>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-logo">HENU <span>OS</span></div>
+            <p>Empowering developers to build amazing web applications</p>
+            <p>Step-by-step guides for hackathons and learning</p>
+            <div class="copyright">
+                <p>&copy; 2025 HENU OS. All rights reserved.</p>
+                <p>Created by HENU OS | Presented by Siddharth Singh</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
