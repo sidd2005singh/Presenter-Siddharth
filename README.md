@@ -52,10 +52,125 @@ No backend server or database is required; everything runs in the browser.
 
 ## 🚀 How to use this repo
 
-### Option 1: Run locally (optional)
+Open index.html in your browser, or serve it with a simple server:
 
-1. Clone the repo:
+bash
+npx serve
+Option 2: Use it on Replit (recommended)
+Go to replit.com and log in.
 
-   ```bash
-   git clone https://github.com/HENU-OS/tshirt-branding-webapp.git
-   cd tshirt-branding-webapp
+Create a new “HTML, CSS, JS” Repl.
+
+Copy the contents of:
+
+index.html
+
+style.css
+
+script.js
+into the corresponding files in your Replit project.
+
+Click “Run” to see the app in the live preview.
+
+Make changes and see them reflected instantly.
+
+🖼️ How the app works (high‑level)
+index.html
+
+Defines the page structure: title, color picker, text input, file upload, and T‑shirt preview area.
+
+style.css
+
+Styles the T‑shirt box, centers text and logo, and makes the UI clean and mobile‑friendly.
+
+script.js
+
+Listens to:
+
+Color picker → changes the T‑shirt background color.
+
+Text input → updates the text on the T‑shirt.
+
+File upload → displays the uploaded logo on the T‑shirt.
+
+No external libraries are required; everything uses native HTML, CSS, and JavaScript.
+
+🛠️ How to extend this project
+You can use this as a base and add more features, such as:
+
+Download the branded T‑shirt image (using html2canvas or similar).
+
+Save/share designs (localStorage or a simple backend).
+
+Add more customization options (font, size, position of text/logo).
+
+Integrate AI (e.g., generate slogans or logos using an LLM API).
+
+🌐 How to publish on Replit
+Make sure your app runs correctly in the Web Preview.
+
+Click the “Publish” button in the top‑right corner of Replit.
+
+Choose “Autoscale deployment” (recommended).
+
+Click “Deploy”.
+
+Replit will give you a public URL like:
+
+tshirt-branding-app.siddharth.repl.co (or your username).
+
+Share this URL with anyone – your T‑Shirt Branding Web App is now live on the internet.
+
+📚 Workshop context
+This project was created and taught by:
+
+Presenter: Siddharth Singh – Founder & CEO, HENU OS
+
+Event: [Hackathon Name], [Date]
+
+Goal: Help 1000+ hackers learn how to build and publish a simple web app entirely in the browser using Replit, with zero local setup.
+
+🤝 How to contribute
+If you’d like to improve this workshop repo:
+
+Fix bugs or typos in the code or README.
+
+Add new features or UI polish.
+
+Improve documentation or add screenshots.
+
+Fork the repo.
+
+Create a feature branch: git checkout -b feature/your-feature.
+
+Commit your changes.
+
+Push and open a Pull Request.
+
+📄 License
+This project is open‑source and available under the MIT License.
+See the LICENSE file for details.
+
+📬 Contact
+Presenter: Siddharth Singh
+
+Organization: HENU OS
+
+Website: https://henuos.com (or your actual site)
+
+GitHub: https://github.com/HENU-OS
+
+Twitter / LinkedIn: [add your handles if you want]
+
+Built during the “Build a T‑Shirt Branding Web App on Replit” workshop by Siddharth Singh – Founder & CEO, HENU OS.
+
+text
+
+***
+
+You can:
+
+- Replace `HENU-OS` / `tshirt-branding-webapp` with your actual org and repo name.  
+- Add a **screenshot** in the repo and link it in the README (e.g., `![T‑Shirt Branding App](screenshots/app.png)`).  
+
+If you want, I can also generate a **shorter “cheat‑sheet” README** (1 page) specifically for hackers to quickly run and play with the app.
